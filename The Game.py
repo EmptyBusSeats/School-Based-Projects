@@ -23,8 +23,9 @@ def failure():
     givePunishment()
 
 timeout = 15
+giveFailure = 0
 questions = ["What gets wet as it drys?: ", "Who owns the territory of Puerto Rico?: ", "What is 9x12?: ", "What has hands, but no legs, cannot move, but always chimes?: ", "What actor plays Maui in Moana?: ", "Who was the 43rd President of the United States?: ", "A bird in the hand is worth?: ", "Who is the host of Family Feud?: ", "Who is the only rapper to win a pulitzer prize?: ", "what is 12 squared?: "]
-answers = ["Towel", "United States", "108", "Clock", "Rock", "George W. Bush", " two in the bush", "Steve Harvey", "Kendrick Lamar", "144"]
+answers = ["Towel", "United States", "108", "Clock", "Rock", "George W. Bush", " Two in the bush", "Steve Harvey", "Kendrick Lamar", "144"]
 
 animate("Welcome to the game")
 animate("What is your name?: ")
@@ -32,14 +33,19 @@ Name = input()
 animate(Name + ", welcome to your doom!")
 
 while True:
-    t = Timer(timeout, failure)
+    
+    t = Timer(timeout, giveFailure = 1)
     t.start()
     position = randint(0, len(questions) - 1)
     prompt = questions[position]
     animate(prompt)
     answer = input()
     t.cancel()
-    animate("Your answer was " + answer)
+    if giveFailure == 1:
+        giveFailure = 0
+        failure()
+    else:
+        animate("Your answer was " + answer)
     sleep(2)
     if answer != answers[position]:
         print("Wrong answer!")
